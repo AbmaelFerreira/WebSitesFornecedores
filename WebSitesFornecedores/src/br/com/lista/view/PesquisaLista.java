@@ -42,8 +42,8 @@ public class PesquisaLista extends javax.swing.JFrame {
         tabelaLista = new javax.swing.JTable();
         lbProduto = new javax.swing.JLabel();
         txtProduto = new javax.swing.JTextField();
-        btnPesquisar = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(400, 200));
@@ -58,18 +58,16 @@ public class PesquisaLista extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabelaLista);
 
-        lbProduto.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbProduto.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lbProduto.setText("PRODUTO");
 
         txtProduto.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtProduto.setMargin(new java.awt.Insets(5, 2, 2, 2));
         txtProduto.setPreferredSize(new java.awt.Dimension(6, 23));
-
-        btnPesquisar.setText("Pesquisar");
-        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPesquisarActionPerformed(evt);
+        txtProduto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtProdutoKeyPressed(evt);
             }
         });
 
@@ -80,45 +78,52 @@ public class PesquisaLista extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("190112.02");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(34, 34, 34)
+                .addComponent(lbProduto)
+                .addGap(33, 33, 33)
+                .addComponent(txtProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(474, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbProduto)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 396, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lbProduto)
-                        .addComponent(btnLimpar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addComponent(lbProduto))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(8, 8, 8)
+                .addComponent(jLabel1))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-       model = (DefaultTableModel) tabelaLista.getModel();
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+       txtProduto.setText("");
+        
+    }//GEN-LAST:event_btnLimparActionPerformed
+
+    private void txtProdutoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProdutoKeyPressed
+        model = (DefaultTableModel) tabelaLista.getModel();
        TableRowSorter sorter = new TableRowSorter<TableModel>(model);
        tabelaLista.setRowSorter(sorter);
        
@@ -128,12 +133,7 @@ public class PesquisaLista extends javax.swing.JFrame {
        }else{
            sorter.setRowFilter(null);
        }
-    }//GEN-LAST:event_btnPesquisarActionPerformed
-
-    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
-       txtProduto.setText("");
-        btnPesquisarActionPerformed(evt);
-    }//GEN-LAST:event_btnLimparActionPerformed
+    }//GEN-LAST:event_txtProdutoKeyPressed
 
     /**
      * @param args the command line arguments
@@ -172,7 +172,7 @@ public class PesquisaLista extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLimpar;
-    private javax.swing.JButton btnPesquisar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbProduto;
     private javax.swing.JTable tabelaLista;
