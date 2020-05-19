@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 public class ConnectionFactory {
     private static final String urlBase = "jdbc:oracle:thin:@10.0.0.9:1521:oxigenio";
     private static final String usuario = "cigam";
-    private static final String senha = "cigam2014";
+    private static final String senha = "*******";
     
     public static Connection getConexao(){
         Connection conexao = null;
